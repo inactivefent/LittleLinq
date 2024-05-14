@@ -54,6 +54,9 @@
 			<DCCReference Include="frmUserSettings_u.pas">
 				<Form>frmUserSettings</Form>
 			</DCCReference>
+			<DCCReference Include="frmAdminPanel_u.pas">
+				<Form>frmAdminPanel</Form>
+			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

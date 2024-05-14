@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, pngimage, jpeg, dmLittleLinqData_u, clsUser_u,
-  Buttons, StrUtils;
+  Dialogs, ExtCtrls, pngimage, StdCtrls, jpeg, dmLittleLinqData_u, StrUtils,
+  Buttons, clsUser_u;
 
 type
   TfrmHome = class(TForm)
@@ -15,44 +15,44 @@ type
     lblPassword: TLabel;
     edtUsername: TEdit;
     edtPassword: TEdit;
-    imgAdmin: TImage;
-    imgPassword: TImage;
     btnLogin: TButton;
-    pnlLandingPage: TPanel;
+    imgShowPassword: TImage;
+    imgAdmin: TImage;
+    pnlLanding: TPanel;
     pnlLearnerManagement: TPanel;
-    pnlInformation: TPanel;
-    pnlParentManagement: TPanel;
     pnlNavigation: TPanel;
-    imgIcon: TImage;
-    lblHeading: TLabel;
+    pnlParentManagement: TPanel;
+    pnlInformation: TPanel;
+    imgLogo: TImage;
+    lblSchoolName: TLabel;
     lblUser: TLabel;
-    lblAdmin: TLabel;
-    btnLogs: TButton;
+    lblAdminIndicator: TLabel;
     btnUserSettings: TButton;
+    btnLogs: TButton;
     btnLogout: TButton;
     btnClose: TBitBtn;
+    imgLearnerIcon: TImage;
     imgParentIcon: TImage;
-    btnParentManagement: TButton;
-    imgLeanerIcon: TImage;
     btnLearnerManagement: TButton;
-    // Custom functions & procedures
-    procedure LoginUser;
+    btnParentManagement: TButton;
+    // User-defined Functions & Procedures
+    procedure LoginUser(sNames, sEmail, sPassword : String);
     procedure LogoutUser;
-    function populateUserObject(sUser: String): TUser;
 
-    procedure imgPasswordClick(Sender: TObject);
+    procedure imgShowPasswordClick(Sender: TObject);
     procedure edtUsernameChange(Sender: TObject);
-    procedure btnLogoutClick(Sender: TObject);
     procedure btnLoginClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnLogoutClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure btnUserSettingsClick(Sender: TObject);
   private
     { Private declarations }
-    sUsername: String;
-    isAdmin: Boolean;
   public
     { Public declarations }
-    objUser: TUser;
+    sUsername: String;
+    isAdmin: Boolean;
+    objUser : TUser;
   end;
 
 var
@@ -98,7 +98,7 @@ begin
       end else begin
         // Logging user in
         isAdmin := qryLittleLinq.FieldByName('admin').AsBoolean;
-        Self.LoginUser;
+        Self.LoginUser(qryLittleLinq.FieldByName('names').AsString, qryLittleLinq.FieldByName('email').AsString, sPassword);
       end;
     end else begin
       ShowMessage('Username not found.');
@@ -126,6 +126,7 @@ end;
 
 procedure TfrmHome.btnUserSettingsClick(Sender: TObject);
 begin
+  // Redirecting to the user settings form
   frmUserSettings.Show;
   Self.Hide;
 end;
@@ -161,19 +162,25 @@ begin
   edtPassword.Text := 'josh@12345';
 end;
 
-procedure TfrmHome.imgPasswordClick(Sender: TObject);
+procedure TfrmHome.FormCreate(Sender: TObject);
+begin
+  // Hiding landing panel to force users to login
+  pnlLanding.Hide;
+end;
+
+procedure TfrmHome.imgShowPasswordClick(Sender: TObject);
 begin
   // This is to show and hide the password.
   if (edtPassword.PasswordChar = #0) then begin
-    imgPassword.Picture.LoadFromFile('./images/ShowPassword.png');
+    imgShowPassword.Picture.LoadFromFile('./images/ShowPassword.png');
     edtPassword.PasswordChar := '*';
   end else begin
-    imgPassword.Picture.LoadFromFile('./images/HidePassword.png');
+    imgShowPassword.Picture.LoadFromFile('./images/HidePassword.png');
     edtPassword.PasswordChar := #0;
   end;
 end;
 
-procedure TfrmHome.LoginUser;
+procedure TfrmHome.LoginUser(sNames, sEmail, sPassword: String);
 begin
   // Setting form caption
   Self.Caption := 'LittleLinq | Landing Page';
@@ -184,15 +191,15 @@ begin
   imgAdmin.Hide;
 
   // Here the user object will be created
-  populateUserObject(sUsername);
+//  objUser := tUser.Create(sUsername, sNames, sEmail, sPassword, isAdmin);
 
   // Setting lblUser and lblAdminIndicator
-  lblUser.Caption := 'User: ' + objUser.GetUsername;
-  lblAdmin.Caption := 'Admin: ' + objUser.PrivilegedAsString;
+  lblUser.Caption := 'User: ' + sUsername;
+  lblAdminIndicator.Caption := 'Admin Privileges: ' + IfThen(isAdmin, 'True', 'False');
 
   // Hiding login panel and then showing landing panel
   pnlLogin.Hide;
-  pnlLandingPage.Show;
+  pnlLanding.Show;
 end;
 
 procedure TfrmHome.LogoutUser;
@@ -201,27 +208,9 @@ begin
   sUsername := '';
   isAdmin := false;
 
-  // Clearing object
-  objUser.Free;
-
   // Hiding landing panel and showing login panel.
-  pnlLandingPage.Hide;
+  pnlLanding.Hide;
   pnlLogin.Show;
-end;
-
-function TfrmHome.populateUserObject(sUser: String): TUser;
-begin
-  // Query all user data from db using username passed
-  dmLittleLinqData.tblUsers.Open;
-  if (dmLittleLinqData.tblUsers.Locate('username', sUser, [])) then begin
-    objUser := tUser.Create(sUser, dmLittleLinqData.tblUsers['names'], dmLittleLinqData.tblUsers['email'], dmLittleLinqData.tblUsers['password'], dmLittleLinqData.tblUsers['admin']);
-    dmLittleLinqData.tblUsers.Close;
-  end;
-
-  // Just a quick validation check to make sure
-  if (objUser.GetUsername = sUser) then begin
-    result := objUser;
-  end;
 end;
 
 end.
