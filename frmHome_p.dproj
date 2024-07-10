@@ -57,6 +57,15 @@
 			<DCCReference Include="frmAdminPanel_u.pas">
 				<Form>frmAdminPanel</Form>
 			</DCCReference>
+			<DCCReference Include="frmLearnerManagement_u.pas">
+				<Form>frmLearnerManagement</Form>
+			</DCCReference>
+			<DCCReference Include="frmParentManagement_u.pas">
+				<Form>frmParentManagement</Form>
+			</DCCReference>
+			<DCCReference Include="frmLogsViewer_u.pas">
+				<Form>frmLogsViewer</Form>
+			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

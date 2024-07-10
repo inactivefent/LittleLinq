@@ -46,6 +46,9 @@ type
     procedure btnLoginClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure btnUserSettingsClick(Sender: TObject);
+    procedure btnLearnerManagementClick(Sender: TObject);
+    procedure btnParentManagementClick(Sender: TObject);
+    procedure btnLogsClick(Sender: TObject);
   private
     { Private declarations }
     sUsername: String;
@@ -59,9 +62,15 @@ var
   frmHome: TfrmHome;
 
 implementation
-  uses frmUserSettings_u;
+  uses frmUserSettings_u, frmLearnerManagement_u, frmParentManagement_u, frmLogsViewer_u;
 
 {$R *.dfm}
+
+procedure TfrmHome.btnLearnerManagementClick(Sender: TObject);
+begin
+  frmLearnerManagement.Show;
+  Self.Hide;
+end;
 
 procedure TfrmHome.btnLoginClick(Sender: TObject);
 var
@@ -122,6 +131,18 @@ begin
         Exit;
       end;
   end;
+end;
+
+procedure TfrmHome.btnLogsClick(Sender: TObject);
+begin
+  frmLogsViewer.Show;
+  Self.Hide;
+end;
+
+procedure TfrmHome.btnParentManagementClick(Sender: TObject);
+begin
+  frmParentManagement.Show;
+  Self.Hide;
 end;
 
 procedure TfrmHome.btnUserSettingsClick(Sender: TObject);
@@ -209,7 +230,7 @@ begin
   pnlLogin.Show;
 end;
 
-function TfrmHome.populateUserObject(sUser: String): TUser;
+function TfrmHome.populateUserObject(sUser: String): tUser;
 begin
   // Query all user data from db using username passed
   dmLittleLinqData.tblUsers.Open;

@@ -3080,6 +3080,7 @@ object frmHome: TfrmHome
         Height = 29
         Caption = 'Learner Management'
         TabOrder = 0
+        OnClick = btnLearnerManagementClick
       end
     end
     object pnlInformation: TPanel
@@ -3749,7 +3750,7 @@ object frmHome: TfrmHome
       object lblHeading: TLabel
         Left = 128
         Top = 8
-        Width = 97
+        Width = 99
         Height = 30
         Caption = 'LittleLinq'
         Font.Charset = DEFAULT_CHARSET
@@ -4421,6 +4422,7 @@ object frmHome: TfrmHome
         Height = 29
         Caption = 'Parent Management'
         TabOrder = 0
+        OnClick = btnParentManagementClick
       end
     end
     object pnlNavigation: TPanel
@@ -4431,11 +4433,12 @@ object frmHome: TfrmHome
       TabOrder = 3
       object btnLogs: TButton
         Left = 12
-        Top = 42
+        Top = 41
         Width = 209
-        Height = 29
+        Height = 31
         Caption = 'Logs'
         TabOrder = 0
+        OnClick = btnLogsClick
       end
       object btnUserSettings: TButton
         Left = 12
