@@ -106,10 +106,10 @@ begin
           objUser.SetNames(edtNames.Text);
         end else if not (edtEmail.Text = objUser.GetEmail) then begin
           // Change Email
-          objUser.SetNames(edtEmail.Text);
+          objUser.SetEmail(edtEmail.Text);
         end else if not (edtPassword.Text = objUser.GetPassword) then begin
           // Change Password
-          objUser.SetNames(edtPassword.Text);
+          objUser.SetPassword(edtPassword.Text);
         end else begin
           Exit;
         end;
