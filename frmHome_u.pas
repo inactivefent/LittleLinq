@@ -97,22 +97,22 @@ begin
 
   // Querying and validating username and password
   with dmLittleLinqData do begin
-    qryLittleLinq.SQL.Text := 'SELECT username, password, admin FROM tblusers WHERE username = :usernameParam';
-    qryLittleLinq.Parameters.ParamByName('usernameParam').Value := sUsername;
-    qryLittleLinq.Open;
+    qryUsers.SQL.Text := 'SELECT username, password, admin FROM tblusers WHERE username = :usernameParam';
+    qryUsers.Parameters.ParamByName('usernameParam').Value := sUsername;
+    qryUsers.Open;
 
-    if not qryLittleLinq.IsEmpty then begin
-      if not(qryLittleLinq.FieldByName('password').AsString = sPassword) then begin
+    if not qryUsers.IsEmpty then begin
+      if not(qryUsers.FieldByName('password').AsString = sPassword) then begin
         ShowMessage('Incorrect Password.');
       end else begin
         // Logging user in
-        isAdmin := qryLittleLinq.FieldByName('admin').AsBoolean;
+        isAdmin := qryUsers.FieldByName('admin').AsBoolean;
         Self.LoginUser;
       end;
     end else begin
       ShowMessage('Username not found.');
     end;
-    qryLittleLinq.Close;
+    qryUsers.Close;
   end;
 
 end;
@@ -160,12 +160,12 @@ begin
 
   // Determining whether user has admin privileges or not
   with dmLittleLinqData do begin
-    qryLittleLinq.SQL.Text :='SELECT admin FROM tblusers WHERE username = :usernameParam';
-    qryLittleLinq.Parameters.ParamByName('usernameParam').Value := edtUsername.Text;
-    qryLittleLinq.Open;
+    qryUsers.SQL.Text :='SELECT admin FROM tblusers WHERE username = :usernameParam';
+    qryUsers.Parameters.ParamByName('usernameParam').Value := edtUsername.Text;
+    qryUsers.Open;
 
-    if not qryLittleLinq.IsEmpty then begin
-      privileged := qryLittleLinq.FieldByName('admin').AsBoolean;
+    if not qryUsers.IsEmpty then begin
+      privileged := qryUsers.FieldByName('admin').AsBoolean;
     end;
   end;
   if (privileged = true) then begin
@@ -178,8 +178,8 @@ end;
 procedure TfrmHome.FormActivate(Sender: TObject);
 begin
   // Time saving (REMOVE)
-  edtUsername.Text := 'oxy';
-  edtPassword.Text := 'josh@12345';
+  edtUsername.Text := 'admin';
+  edtPassword.Text := 'admin@12345';
 end;
 
 procedure TfrmHome.imgPasswordClick(Sender: TObject);
@@ -205,7 +205,11 @@ begin
   imgAdmin.Hide;
 
   // Here the user object will be created
-  populateUserObject(sUsername);
+  objUser := populateUserObject(sUsername);
+  if (objUser = nil) then begin
+    ShowMessage('Something broke');
+    Exit;
+  end;
 
   // Setting lblUser and lblAdminIndicator
   lblUser.Caption := 'User: ' + objUser.GetUsername;
@@ -214,6 +218,9 @@ begin
   // Hiding login panel and then showing landing panel
   pnlLogin.Hide;
   pnlLandingPage.Show;
+
+  // Alerting user of successful login
+  ShowMessage('Login Complete.');
 end;
 
 procedure TfrmHome.LogoutUser;
@@ -235,13 +242,13 @@ begin
   // Query all user data from db using username passed
   dmLittleLinqData.tblUsers.Open;
   if (dmLittleLinqData.tblUsers.Locate('username', sUser, [])) then begin
-    objUser := tUser.Create(sUser, dmLittleLinqData.tblUsers['names'], dmLittleLinqData.tblUsers['email'], dmLittleLinqData.tblUsers['password'], dmLittleLinqData.tblUsers['admin']);
+    result := tUser.Create(dmLittleLinqData.tblUsers['educatorID'], sUser, dmLittleLinqData.tblUsers['names'], dmLittleLinqData.tblUsers['email'], dmLittleLinqData.tblUsers['class'], dmLittleLinqData.tblUsers['password'], dmLittleLinqData.tblUsers['admin']);
     dmLittleLinqData.tblUsers.Close;
   end;
 
   // Just a quick validation check to make sure
-  if (objUser.GetUsername = sUser) then begin
-    result := objUser;
+  if not (result.GetUsername = sUser) then begin
+    result := nil;
   end;
 end;
 

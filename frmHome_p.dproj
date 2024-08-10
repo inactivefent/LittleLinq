@@ -20,6 +20,7 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<BRCC_IncludePath>$(BDS)\lib\release;$(BDS)\lib\debug;$(BRCC_IncludePath)</BRCC_IncludePath>
 			<DCC_DependencyCheckOutputName>frmHome_p.exe</DCC_DependencyCheckOutputName>
 			<DCC_ImageBase>00400000</DCC_ImageBase>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
@@ -66,6 +67,7 @@
 			<DCCReference Include="frmLogsViewer_u.pas">
 				<Form>frmLogsViewer</Form>
 			</DCCReference>
+			<None Include="frmHome_p.todo"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

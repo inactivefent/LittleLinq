@@ -2,7 +2,7 @@ object frmHome: TfrmHome
   Left = 0
   Top = 0
   Caption = 'LittleLinq'
-  ClientHeight = 285
+  ClientHeight = 287
   ClientWidth = 730
   Color = 10710434
   Font.Charset = DEFAULT_CHARSET
@@ -494,6 +494,7 @@ object frmHome: TfrmHome
     0000000000000000000000000000000000000000000000000000000000000000
     0000000000000000000000000000}
   OldCreateOrder = False
+  Position = poScreenCenter
   OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
@@ -2529,7 +2530,7 @@ object frmHome: TfrmHome
   end
   object pnlLandingPage: TPanel
     Left = 9
-    Top = 8
+    Top = 9
     Width = 712
     Height = 269
     Color = 14203563
@@ -3748,7 +3749,7 @@ object frmHome: TfrmHome
         Stretch = True
       end
       object lblHeading: TLabel
-        Left = 128
+        Left = 125
         Top = 8
         Width = 99
         Height = 30

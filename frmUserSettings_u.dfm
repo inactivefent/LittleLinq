@@ -1002,22 +1002,13 @@ object frmUserSettings: TfrmUserSettings
       TabOrder = 0
       OnClick = btnAdminClick
     end
-    object btnEdit: TButton
-      Left = 488
-      Top = 184
-      Width = 75
-      Height = 25
-      Caption = 'Edit'
-      TabOrder = 1
-      OnClick = btnEditClick
-    end
     object edtUsername: TEdit
       Left = 344
       Top = 57
       Width = 219
       Height = 21
       ReadOnly = True
-      TabOrder = 2
+      TabOrder = 1
       Text = 'edtUsername'
     end
     object edtNames: TEdit
@@ -1026,7 +1017,7 @@ object frmUserSettings: TfrmUserSettings
       Width = 219
       Height = 21
       ReadOnly = True
-      TabOrder = 3
+      TabOrder = 2
       Text = 'edtUsername'
     end
     object edtEmail: TEdit
@@ -1035,7 +1026,7 @@ object frmUserSettings: TfrmUserSettings
       Width = 219
       Height = 21
       ReadOnly = True
-      TabOrder = 4
+      TabOrder = 3
       Text = 'edtUsername'
     end
     object edtPassword: TEdit
@@ -1044,28 +1035,18 @@ object frmUserSettings: TfrmUserSettings
       Width = 219
       Height = 21
       ReadOnly = True
-      TabOrder = 5
+      TabOrder = 4
       Text = 'edtUsername'
     end
-    object btnCancel: TButton
-      Left = 407
-      Top = 184
-      Width = 75
-      Height = 25
-      Caption = 'Cancel'
-      Enabled = False
-      TabOrder = 6
-      OnClick = btnCancelClick
-    end
-    object btnSave: TButton
+    object btnClose: TBitBtn
       Left = 488
       Top = 184
       Width = 75
       Height = 25
-      Caption = 'Save'
-      TabOrder = 7
-      Visible = False
-      OnClick = btnSaveClick
+      DoubleBuffered = True
+      Kind = bkClose
+      ParentDoubleBuffered = False
+      TabOrder = 5
     end
   end
 end

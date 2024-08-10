@@ -8,9 +8,21 @@ uses
 type
   TdmLittleLinqData = class(TDataModule)
     conLittleLinq: TADOConnection;
-    qryLittleLinq: TADOQuery;
+    qryUsers: TADOQuery;
     dsrUsers: TDataSource;
     tblUsers: TADOTable;
+    tblParents: TADOTable;
+    tblEmergencyContact: TADOTable;
+    tblEmergencyContacts: TADOTable;
+    dsrLearners: TDataSource;
+    dsrParents: TDataSource;
+    dsrEmergencyContact: TDataSource;
+    dsrEmergencyContacts: TDataSource;
+    qryLearners: TADOQuery;
+    qryParents: TADOQuery;
+    qryEmergencyContact: TADOQuery;
+    qryEmergencyContacts: TADOQuery;
+    dsrUsers2: TDataSource;
   private
     { Private declarations }
   public

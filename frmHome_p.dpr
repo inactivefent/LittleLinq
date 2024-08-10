@@ -16,6 +16,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.Title := 'LittleLinq';
   Application.CreateForm(TfrmHome, frmHome);
   Application.CreateForm(TdmLittleLinqData, dmLittleLinqData);
   Application.CreateForm(TfrmUserSettings, frmUserSettings);
