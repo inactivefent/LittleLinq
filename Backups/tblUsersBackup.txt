@@ -1,0 +1,11 @@
+"AA123"#"admin"#"admin"#"admin@admin.com"#"AA"#"admin@12345"#1
+"EC456"#"emily_clark"#"Emily Clark"#"emily.clark@school.com"#"1A"#"emily@12345"#1
+"JD345"#"john_doe"#"John Doe"#"john.doe@school.com"#"1B"#"john@12345"#1
+"JN469"#"naidoo5"#"Jabulani Naidoo"#"jabulani.naidoo.5@school.com"#"3C"#"jabulani@12345"#0
+"JS567"#"jane_smith"#"Jane Smith"#"jane.smith@school.com"#"1C"#"jane@12345"#0
+"LG321"#"lucy_gray"#"Lucy Gray"#"lucy.gray@school.com"#"2A"#"lucy@12345"#1
+"MJ234"#"mary_jane"#"Mary Jane"#"mary.jane@school.com"#"2B"#"mary@12345"#1
+"MJ543"#"michael_jordan"#"Michael Jordan"#"michael.jordan@school.com"#"2C"#"micheal@12345"#0
+"RB789"#"robert_brown"#"Robert Brown"#"robert.brown@school.com"#"3A"#"robert@12345"#0
+"TH678"#"tom_hardy"#"Tom Hardy"#"tom.hardy@school.com"#"3B"#"tom@12345"#0
+"UU123"#"user"#"user"#"user@user.com"#"UU"#"user@12345"#0
